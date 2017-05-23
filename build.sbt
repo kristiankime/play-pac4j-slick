@@ -9,7 +9,6 @@ scalaVersion := "2.11.11"
 
 libraryDependencies += filters
 libraryDependencies += cache
-//libraryDependencies += "com.typesafe.play" % "play-cache_2.11" % "2.5.4"
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.0" % Test
 
 // === Start Pac4j includes ===, example project here https://github.com/pac4j/play-pac4j-scala-demo

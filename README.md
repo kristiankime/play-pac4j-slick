@@ -1,5 +1,13 @@
 # play-pac4j-slick
-Sample Play project coded in Scala that uses pac4j for authentication and slick to store user information
+Sample Play project coded in Scala that uses pac4j for authentication and slick to store user information.
+
+From the web side of things the setup looks like this:
+ 
+1. Open Pages: Users can get unauthenticated
+2. Secure Pages: Which redirect users to the Sign In Page
+3. Sign In Page: Which give the users options about what login method they want to use
+4. Sign Up Page: Which lets users create a login for the site
+
 
 ## Creation Steps
 The following steps were used creating this project.
@@ -18,3 +26,6 @@ Next the pac4j play integration as added as per https://github.com/pac4j/play-pa
 
 Note during this step an attempt was made to clearly delineate all files that were added by placing them in a separate file/folder when possilble.
 These files/folders were named "auth" or "pac4j.xxx" whenever possible. When this was not possible comments were added to delineate the pac4j content.
+
+### 4 Pac4j redirect when unauthenticated
+Added the class RedirectUnauthenticatedClient which redirects unauthenticated users. This was used to implement the "Secure Pages" redirect functionality. 
