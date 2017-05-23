@@ -21,7 +21,7 @@ public class RedirectUnauthenticatedClient extends IndirectClient<AnonymousCrede
 
     @Override
     protected void clientInit(WebContext context) {
-        // NOOP this 
+        // NOOP no initialization is needed we just redirect
     }
 
 }
