@@ -22,7 +22,7 @@ public class RedirectUnauthenticatedClient extends IndirectClient<AnonymousCrede
     @Override
     protected void clientInit(WebContext context) {
         defaultRedirectActionBuilder(webContext ->  RedirectAction.redirect(url));
-        defaultCredentialsExtractor(webContext -> AnonymousCredentials.INSTANCE);
+        defaultCredentialsExtractor(webContext -> null);
         defaultAuthenticator( (c, wc) -> {});
     }
 
