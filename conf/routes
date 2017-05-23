@@ -3,8 +3,24 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-# An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /                           controllers.ApplicationController.index
+GET     /secure                     controllers.ApplicationController.secure
+
+# ===== Start auth routes ======
+GET     /auth/signIn                controllers.auth.AuthController.signIn
+GET     /auth/signUp                controllers.auth.AuthController.signUp
+GET     /auth/form                  controllers.auth.AuthController.formClient
+GET     /auth/google                controllers.auth.AuthController.googleClient
+# ===== End auth routes ======
+
+# ===== Start play-pac4j routes ======
+GET     /callback                   @org.pac4j.play.CallbackController.callback()
+POST    /callback                   @org.pac4j.play.CallbackController.callback()
+GET     /casProxyCallback           @org.pac4j.play.CallbackController.callback()
+POST    /casProxyCallback           @org.pac4j.play.CallbackController.callback()
+GET     /logout                     @org.pac4j.play.LogoutController.logout()
+GET     /auth/loginForm             controllers.auth.AuthController.loginForm
+# ===== End play-pac4j routes ======
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

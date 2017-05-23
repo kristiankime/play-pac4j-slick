@@ -12,3 +12,9 @@ When the project was imported into intellij there was an [error](http://stackove
 
 Preferences > Languages & Frameworks > Play2
 Under 'Compiler' enable 'Use Play 2 compiler for this project'
+
+### 3 Basic pac4j integration
+Next the pac4j play integration as added as per https://github.com/pac4j/play-pac4j
+
+Note during this step an attempt was made to clearly delineate all files that were added by placing them in a separate file/folder when possilble.
+These files/folders were named "auth" or "pac4j.xxx" whenever possible. When this was not possible comments were added to delineate the pac4j content.
