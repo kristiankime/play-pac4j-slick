@@ -5,6 +5,7 @@ import controllers.auth.{DemoHttpActionAdapter, CustomAuthorizer, RoleAdminAuthG
 import controllers.auth.DemoHttpActionAdapter
 import org.pac4j.cas.client.{CasClient, CasProxyReceptor}
 import org.pac4j.core.client.Clients
+import org.pac4j.core.client.unauthenticated.RedirectUnauthenticatedClient
 import org.pac4j.http.client.direct.{DirectBasicAuthClient, ParameterClient}
 import org.pac4j.http.client.indirect.{FormClient, IndirectBasicAuthClient}
 import org.pac4j.http.credentials.authenticator.test.SimpleTestUsernamePasswordAuthenticator
@@ -48,7 +49,9 @@ class SecurityModule(environment: Environment, configuration: Configuration) ext
     val oidcClient = new OidcClient[OidcProfile](oidcConfiguration)
     oidcClient.addAuthorizationGenerator(new RoleAdminAuthGenerator)
 
-    val clients = new Clients(baseUrl + "/callback", formClient, oidcClient)
+    val redirectUnauthenticatedClient = new RedirectUnauthenticatedClient("/auth/signIn")
+
+    val clients = new Clients(baseUrl + "/callback", formClient, oidcClient, redirectUnauthenticatedClient)
 
     val config = new Config(clients)
     config.addAuthorizer("admin", new RequireAnyRoleAuthorizer[Nothing]("ROLE_ADMIN"))

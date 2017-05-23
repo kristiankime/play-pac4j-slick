@@ -16,7 +16,7 @@ class ApplicationController @Inject()(val config: Config, val playSessionStore: 
     Ok(views.html.index())
   }
 
-  def secure = Secure("FormClient,OidcClient") { profiles =>
+  def secure = Secure("RedirectUnauthenticatedClient") { profiles =>
     Action { request =>
       Ok(views.html.secure())
     }
