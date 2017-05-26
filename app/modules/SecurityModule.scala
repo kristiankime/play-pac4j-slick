@@ -51,7 +51,10 @@ class SecurityModule(environment: Environment, configuration: Configuration) ext
 
     val redirectUnauthenticatedClient = new RedirectUnauthenticatedClient("/auth/signIn")
 
-    val clients = new Clients(baseUrl + "/callback", formClient, oidcClient, redirectUnauthenticatedClient)
+    // HTTP - this is currently only used in testing
+    val indirectBasicAuthClient = new IndirectBasicAuthClient(new SimpleTestUsernamePasswordAuthenticator())
+
+    val clients = new Clients(baseUrl + "/callback", formClient, oidcClient, redirectUnauthenticatedClient, indirectBasicAuthClient)
 
     val config = new Config(clients)
     config.addAuthorizer("admin", new RequireAnyRoleAuthorizer[Nothing]("ROLE_ADMIN"))
