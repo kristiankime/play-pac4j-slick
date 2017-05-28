@@ -6,12 +6,7 @@ import play.api.test.Helpers.{contentAsString, _}
 import java.nio.charset.StandardCharsets
 import java.util.Base64
 
-import fakes.FakeCache
-import org.junit.runner.RunWith
 import org.scalatestplus.play.guice.GuiceOneAppPerTest
-
-//import fakes.FakeCache
-//import play.api.test.PlaySpecification
 
 import play.api.cache.CacheApi
 import play.api.inject._

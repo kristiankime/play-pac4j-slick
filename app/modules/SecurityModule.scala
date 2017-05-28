@@ -1,14 +1,14 @@
 package modules
 
 import com.google.inject.AbstractModule
-import controllers.auth.{DemoHttpActionAdapter, CustomAuthorizer, RoleAdminAuthGenerator}
+import controllers.auth.{CustomAuthorizer, DemoHttpActionAdapter, RoleAdminAuthGenerator}
 import controllers.auth.DemoHttpActionAdapter
 import org.pac4j.cas.client.{CasClient, CasProxyReceptor}
 import org.pac4j.core.client.Clients
 import org.pac4j.core.client.unauthenticated.RedirectUnauthenticatedClient
 import org.pac4j.http.client.direct.{DirectBasicAuthClient, ParameterClient}
 import org.pac4j.http.client.indirect.{FormClient, IndirectBasicAuthClient}
-import org.pac4j.http.credentials.authenticator.test.SimpleTestUsernamePasswordAuthenticator
+import org.pac4j.http.credentials.authenticator.test.{AuthenticateInTestModeAuthenticator, SimpleTestUsernamePasswordAuthenticator}
 import org.pac4j.jwt.credentials.authenticator.JwtAuthenticator
 import org.pac4j.oauth.client.{FacebookClient, TwitterClient}
 import org.pac4j.oidc.client.OidcClient
@@ -51,8 +51,8 @@ class SecurityModule(environment: Environment, configuration: Configuration) ext
 
     val redirectUnauthenticatedClient = new RedirectUnauthenticatedClient("/auth/signIn")
 
-    // HTTP - this is currently only used in testing
-    val indirectBasicAuthClient = new IndirectBasicAuthClient(new SimpleTestUsernamePasswordAuthenticator())
+    // HTTP - this is only used in testing
+    val indirectBasicAuthClient = new IndirectBasicAuthClient(new AuthenticateInTestModeAuthenticator(configuration.getBoolean("testAuth").get ))
 
     val clients = new Clients(baseUrl + "/callback", formClient, oidcClient, redirectUnauthenticatedClient, indirectBasicAuthClient)
 
