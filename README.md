@@ -29,3 +29,6 @@ These files/folders were named "auth" or "pac4j.xxx" whenever possible. When thi
 
 ### 4 Pac4j redirect when unauthenticated
 Added the class RedirectUnauthenticatedClient which redirects unauthenticated users. This was used to implement the "Secure Pages" redirect functionality. 
+
+### 5 Pac4j sql authentication
+Added [DbProfileService](http://www.pac4j.org/2.0.x/docs/authenticators/sql.html) to SecurityModule as well as associated db support like [evolutions](https://www.playframework.com/documentation/2.5.x/Evolutions).
