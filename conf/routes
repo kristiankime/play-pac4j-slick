@@ -11,6 +11,8 @@ GET     /auth/signIn                controllers.auth.AuthController.signIn
 GET     /auth/signUp                controllers.auth.AuthController.signUp
 GET     /auth/form                  controllers.auth.AuthController.formClient
 GET     /auth/google                controllers.auth.AuthController.googleClient
+
+POST    /auth/createLogin           controllers.auth.AuthController.createLogin
 # ===== End auth routes ======
 
 # ===== Start play-pac4j routes ======

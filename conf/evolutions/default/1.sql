@@ -4,15 +4,15 @@
 
 CREATE TABLE logins
 (
-    id VARCHAR(255) PRIMARY KEY,
-    username VARCHAR(255),
-    password VARCHAR(255),
-    linkedid VARCHAR(255),
-    serializedprofile VARCHAR(10000)
+    id VARCHAR PRIMARY KEY,
+    user_name VARCHAR,
+    password VARCHAR,
+    linkedid VARCHAR,
+    serializedprofile VARCHAR
 );
 
-CREATE INDEX ON logins (username);
-CREATE INDEX ON logins (linkedid);
+CREATE INDEX logins_idx_user_name ON logins (user_name);
+CREATE INDEX logins_idx_linked_id ON logins (linkedid);
 
 # --- !Downs
 

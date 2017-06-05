@@ -55,7 +55,11 @@ class SecurityModule(environment: Environment, configuration: Configuration) ext
     val dataSource = JdbcConnectionPool.create(dbUrl, dbUser, dbPassword) // http://www.pac4j.org/2.0.x/docs/authenticators/sql.html
     val dbProfileService = new DbProfileService(dataSource) // https://github.com/pac4j/pac4j/pull/848
     dbProfileService.setUsersTable("logins")
+    dbProfileService.setIdAttribute("id")
+    dbProfileService.setUsernameAttribute("user_name")
+    dbProfileService.setPasswordAttribute("password")
     dbProfileService.setPasswordEncoder(new SpringSecurityPasswordEncoder(NoOpPasswordEncoder.getInstance())) // TODO put real encoder here
+    bind(classOf[DbProfileService]).toInstance(dbProfileService) // Expose dbProfileService for use in controllers
 
     // ====== Pac4j Clients ======
 //    val formClient = new FormClient(baseUrl + "/auth/loginForm", new SimpleTestUsernamePasswordAuthenticator())
@@ -69,7 +73,7 @@ class SecurityModule(environment: Environment, configuration: Configuration) ext
     oidcConfiguration.addCustomParam("prompt", "consent")
     val oidcClient = new OidcClient[OidcProfile](oidcConfiguration)
     oidcClient.addAuthorizationGenerator(new RoleAdminAuthGenerator)
-//    oidcClient.setAuthenticator(dbProfileService) TODO how to store google ids
+//    oidcClient.setAuthenticator(dbProfileService) TODO how to store google logins in db for access
 
     val redirectUnauthenticatedClient = new RedirectUnauthenticatedClient("/auth/signIn")
 
