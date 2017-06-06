@@ -13,6 +13,7 @@ import org.pac4j.play.scala._
 import org.pac4j.core.credentials.Credentials
 import javax.inject.Inject
 
+import dao.auth.LoginDAO
 import play.libs.concurrent.HttpExecutionContext
 import org.pac4j.core.config.Config
 import org.pac4j.core.context.Pac4jConstants
@@ -27,11 +28,13 @@ import org.pac4j.sql.profile.service.DbProfileService
 import play.api.data._
 import play.api.data.Forms._
 
+import scala.concurrent.ExecutionContext
+
 /**
  * This controller handles actions specifically related to Authentication and Authorization
  */
 @Singleton
-class AuthController @Inject()(val config: Config, val playSessionStore: PlaySessionStore, val dbProfileService: DbProfileService, override val ec: HttpExecutionContext) extends Controller with Security[CommonProfile] {
+class AuthController @Inject()(val config: Config, val playSessionStore: PlaySessionStore, val dbProfileService: DbProfileService, val loginDAO: LoginDAO, override val ec: HttpExecutionContext)(implicit val executionContext: ExecutionContext) extends Controller with Security[CommonProfile] {
 
   def signIn = Action { implicit request =>
     Ok(views.html.auth.signIn.render())
@@ -56,6 +59,12 @@ class AuthController @Inject()(val config: Config, val playSessionStore: PlaySes
     )
 
     Ok(views.html.index.render())
+  }
+
+  def viewLoginDb = Action.async { implicit request =>
+    loginDAO.all().map { logins =>
+      Ok(views.html.auth.viewDB.render(logins))
+    }
   }
 
   def formClient = Secure("FormClient") { profiles =>

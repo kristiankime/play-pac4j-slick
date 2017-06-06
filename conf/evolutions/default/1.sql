@@ -4,9 +4,9 @@
 
 CREATE TABLE logins
 (
-    id VARCHAR PRIMARY KEY,
-    user_name VARCHAR,
-    password VARCHAR,
+    id VARCHAR PRIMARY KEY NOT NULL,
+    user_name VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
     linkedid VARCHAR,
     serializedprofile VARCHAR
 );

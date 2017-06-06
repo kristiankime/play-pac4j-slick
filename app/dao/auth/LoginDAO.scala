@@ -24,8 +24,8 @@ class LoginDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
     def id = column[String]("id", O.PrimaryKey)
     def userName = column[String]("user_name")
     def password = column[String]("password")
-    def linkedId = column[String]("linked_id")
-    def serializedprofile = column[String]("serializedprofile")
+    def linkedId = column[Option[String]]("linkedid")
+    def serializedprofile = column[Option[String]]("serializedprofile")
 
     def * = (id, userName, password, linkedId, serializedprofile) <> (NamePassLogin.tupled, NamePassLogin.unapply)
   }
